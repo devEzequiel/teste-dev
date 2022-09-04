@@ -17,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\BookRepositoryInterface',
             'App\Repositories\BookRepository'
         );
+
+        $this->app->bind(
+            'App\Contracts\CategoryRepositoryInterface',
+            'App\Repositories\CategoryRepository'
+        );
     }
 
     /**
