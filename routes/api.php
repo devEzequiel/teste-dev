@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+//routes endpoints
+Route::namespace('Api\V1')->name('recipes.')->prefix('v1')->group(function () {
+    require_once ('modules/category.php');
 });
