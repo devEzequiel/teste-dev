@@ -18,7 +18,7 @@ class Controller extends BaseController
      * @param string $message
      * @return JsonResponse
      */
-    public function responseOk(array $data, string $message = 'success')
+    public function responseOk(array $data, string $message = 'success'): JsonResponse
     {
         return response()->json(['message' => $message, 'data' => $data], Response::HTTP_OK);
     }
@@ -27,7 +27,7 @@ class Controller extends BaseController
      * @param string $message
      * @return JsonResponse
      */
-    public function responseCreated(string $message = '')
+    public function responseCreated(string $message = ''): JsonResponse
     {
         return response()->json($message ? ['message' => $message] : null, Response::HTTP_CREATED);
     }
@@ -35,7 +35,7 @@ class Controller extends BaseController
     /**
      * @return JsonResponse
      */
-    public function responseAccepted()
+    public function responseAccepted(): JsonResponse
     {
         return response()->json(null, Response::HTTP_ACCEPTED);
     }
@@ -43,7 +43,7 @@ class Controller extends BaseController
     /**
      * @return JsonResponse
      */
-    public function responseUnathorized()
+    public function responseUnauthorized(): JsonResponse
     {
         return response()->json(null, Response::HTTP_UNAUTHORIZED);
     }
@@ -51,7 +51,7 @@ class Controller extends BaseController
     /**
      * @return JsonResponse
      */
-    public function responseForbidden()
+    public function responseForbidden(): JsonResponse
     {
         return response()->json(null, Response::HTTP_FORBIDDEN);
     }
@@ -60,7 +60,7 @@ class Controller extends BaseController
      * @param string $message
      * @return JsonResponse
      */
-    public function responseNotFound(string $message = '')
+    public function responseNotFound(string $message = ''): JsonResponse
     {
         return response()->json($message ? ['message' => $message] : null, Response::HTTP_NOT_FOUND);
     }
