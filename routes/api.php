@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //routes endpoints
-Route::namespace('Api\V1')->name('recipes.')->prefix('v1')->group(function () {
+Route::prefix('v1')->group(function () {
     require_once ('modules/category.php');
+    require_once ('modules/utils.php');
 });
