@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
-use App\Contracts\CategoryRepositoryInterface;
+use App\Repositories\CategoryRepository;
 use Illuminate\Support\Str;
 use Exception;
 
 class CategoryService
 {
-    public function __construct(protected CategoryRepositoryInterface $categoryRepository)
-    {}
+    public function __construct(protected CategoryRepository $categoryRepository)
+    {
+    }
 
     public function create(array $data)
     {
@@ -39,4 +40,5 @@ class CategoryService
             throw $e;
         }
     }
+
 }
