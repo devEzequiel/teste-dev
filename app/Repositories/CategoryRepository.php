@@ -9,17 +9,18 @@ use Exception;
 class CategoryRepository
 {
     /**
-     * @return Collection
+     * @return array
      * @throws Exception
      */
-    public function list(): Collection
+    public function list(): array
     {
         try {
             return Category::query()
                 ->get()->map(fn($category) => [
+                    'id' => $category->id,
                     'name' => $category->name,
                     'slug' => $category->slug
-                ]);
+                ])->toArray();
         } catch (Exception $e) {
             throw $e;
         }
@@ -49,7 +50,7 @@ class CategoryRepository
         try {
             $category = Category::find($id);
 
-            if ($category) {
+            if (!$category) {
                 throw new Exception('Categoria não encontrada');
             }
 
