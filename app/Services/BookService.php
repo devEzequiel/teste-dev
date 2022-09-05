@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-
+use Exception;
 use App\Repositories\BookRepository;
 
 class BookService
@@ -11,9 +11,36 @@ class BookService
     {
     }
 
-    public function getBooks($filters)
+    /**
+     * @throws \Exception
+     */
+    public function list(array $filters): array
     {
-        return $this->bookRepository->list($filters);
+        try {
+            return $this->bookRepository->list($filters);
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+    }
+
+    public function getBook(int $id): array
+    {
+        try {
+            return $this->bookRepository->getBook($id);
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+    }
+
+    public function create(array $data)
+    {
+        try {
+            return $this->bookRepository->create($data);
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
 }

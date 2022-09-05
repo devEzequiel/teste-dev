@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Book;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FilterBooksRequest extends FormRequest
+class CreateBookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class FilterBooksRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class FilterBooksRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'category_id' => 'nullable|exists:categories,id',
+            'type_id' => 'required|exists:file_types,id',
+            'name' => 'required|unique:books,name',
+            'author' => 'required',
+            'code' => 'required',
+            'size' => 'required'
         ];
     }
 }

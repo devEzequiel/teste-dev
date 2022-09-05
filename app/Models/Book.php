@@ -10,6 +10,15 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'category_id',
+        'type_id',
+        'name',
+        'author',
+        'code',
+        'size'
+    ];
+
     public function scopeFilter($query, $filters)
     {
         $query->when($filters['category'], function ($query, $category) {
@@ -25,5 +34,15 @@ class Book extends Model
             ->when($filters['search'], function ($query, $search) {
                 $query->where('id', 'LIKE', '%' . $search . '%');
             });
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(FileType::class, 'type_id', 'id', '');
     }
 }
