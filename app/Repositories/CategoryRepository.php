@@ -17,6 +17,7 @@ class CategoryRepository
         try {
             return Category::query()
                 ->get()->map(fn($category) => [
+                    'id' => $category->id,
                     'name' => $category->name,
                     'slug' => $category->slug
                 ])->toArray();
