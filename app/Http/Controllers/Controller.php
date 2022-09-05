@@ -35,9 +35,9 @@ class Controller extends BaseController
     /**
      * @return JsonResponse
      */
-    public function responseAccepted(): JsonResponse
+    public function responseAccepted(string $message = 'success'): JsonResponse
     {
-        return response()->json(null, Response::HTTP_ACCEPTED);
+        return response()->json(['message' => $message], Response::HTTP_ACCEPTED);
     }
 
     /**
