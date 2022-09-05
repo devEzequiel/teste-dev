@@ -50,7 +50,7 @@ class CategoryRepository
         try {
             $category = Category::find($id);
 
-            if ($category) {
+            if (!$category) {
                 throw new Exception('Categoria não encontrada');
             }
 
