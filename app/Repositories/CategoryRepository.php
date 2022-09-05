@@ -9,17 +9,17 @@ use Exception;
 class CategoryRepository
 {
     /**
-     * @return Collection
+     * @return array
      * @throws Exception
      */
-    public function list(): Collection
+    public function list(): array
     {
         try {
             return Category::query()
                 ->get()->map(fn($category) => [
                     'name' => $category->name,
                     'slug' => $category->slug
-                ]);
+                ])->toArray();
         } catch (Exception $e) {
             throw $e;
         }
