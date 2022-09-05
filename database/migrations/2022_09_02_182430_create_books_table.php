@@ -24,6 +24,9 @@ return new class extends Migration
             $table->float('size');
 
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('type_id')->references('id')->on('file_types');
         });
     }
 
