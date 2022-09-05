@@ -24,7 +24,16 @@ class CreateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2'
+            'name' => 'required|min:2|unique:categories,name'
+        ];
+    }
+
+    public function messages()
+    {
+        return[
+            'name.unique' => 'Categoria já adicionada',
+            'name.required' => 'É necessário o nome da categoria',
+            'name.min' => 'Nome muito curto'
         ];
     }
 }
