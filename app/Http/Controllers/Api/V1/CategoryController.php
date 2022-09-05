@@ -26,7 +26,7 @@ class  CategoryController extends Controller
             $categories = $this->categoryService->list();
 
             if (empty($categories)) {
-                return $this->responseAccepted('Categoria removida');
+                return $this->responseAccepted('Nenhuma categoria encontrada');
             }
 
             return $this->responseOk($categories);
