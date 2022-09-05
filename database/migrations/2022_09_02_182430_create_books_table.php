@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('author');
+            //string instead int (or another num format) for avoid problems when the code be something like '0000123'
             $table->string('code')->unique();
             $table->float('size');
 
