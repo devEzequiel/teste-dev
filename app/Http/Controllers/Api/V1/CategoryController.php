@@ -8,7 +8,7 @@ use App\Services\CategoryService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class  CategoryController extends Controller
 {
 
     public function __construct(protected CategoryService $categoryService)

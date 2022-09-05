@@ -9,8 +9,7 @@ use Exception;
 class CategoryService
 {
     public function __construct(protected CategoryRepositoryInterface $categoryRepository)
-    {
-    }
+    {}
 
     public function create(array $data)
     {
@@ -31,6 +30,7 @@ class CategoryService
             throw $e;
         }
     }
+
     public function delete(int $id)
     {
         try {
@@ -39,5 +39,4 @@ class CategoryService
             throw $e;
         }
     }
-
 }
