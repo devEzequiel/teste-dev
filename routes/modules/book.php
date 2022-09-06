@@ -9,6 +9,6 @@ Route::controller(\App\Http\Controllers\Api\V1\BookController::class)
         Route::get('/', 'all')->name('list');
         Route::get('/{id}', 'show')->name('detail');
         Route::post('/', 'store')->name('create');
-        Route::put('/{id}', 'update')->name('edit');
+        Route::patch('/', 'update')->name('edit');
         Route::delete('/{id}', 'destroy')->name('delete');
     });

@@ -28,8 +28,8 @@ class CreateBookRequest extends FormRequest
             'type_id' => 'required|exists:file_types,id',
             'name' => 'required|unique:books,name',
             'author' => 'required',
-            'code' => 'required',
-            'size' => 'required'
+            'code' => 'required|unique:books,code',
+            'size' => 'required|numeric'
         ];
     }
 }

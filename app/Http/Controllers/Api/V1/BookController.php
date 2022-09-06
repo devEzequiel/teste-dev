@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Book\CreateBookRequest;
 use App\Http\Requests\Book\FilterBooksRequest;
+use App\Http\Requests\Book\UpdateBookRequest;
 use App\Services\BookService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Exception;
 
 class BookController extends Controller
 {
@@ -27,12 +29,8 @@ class BookController extends Controller
             $filters = $request->validated();
             $books = $this->bookService->list($filters);
 
-            if (empty($books)) {
-                return $this->responseAccepted('Nenhum livro cadastrado');
-            }
-
             return $this->responseOk($books);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->responseUnprocessableEntity($e->getMessage());
         }
     }
@@ -51,7 +49,7 @@ class BookController extends Controller
             $this->bookService->create($data);
 
             return $this->responseCreated('Livro adicionado');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->responseUnprocessableEntity($e->getMessage());
         }
     }
@@ -65,44 +63,47 @@ class BookController extends Controller
     public function show(int $id): JsonResponse
     {
         try {
-            $books = $this->bookService->getBook($id);
-
-            if (!$books) {
-                return $this->responseAccepted('Livro não encontrado');
-            }
+            $book = $this->bookService->getBook($id);
 
             return $this->responseOk($books);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->responseUnprocessableEntity($e->getMessage());
         }
     }
+
     /**
      * Update the specified book.
      *
-     * @param int $id
+     * @param UpdateBookRequest $request
      * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBookRequest $request): JsonResponse
     {
-        //
+        try {
+            $data = $request->validated();
+
+            $this->bookService->update($data);
+
+            return $this->responseCreated('Livro atualizado');
+        } catch (Exception $e) {
+            return $this->responseUnprocessableEntity($e->getMessage());
+        }
     }
 
     /**
      * Remove the specified book from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         try {
-            $this->recipe->deleteRecipe(2);
+            $this->bookService->delete($id);
 
-            return response()->json(['status' => 'success', 'message' => 'Recipe deleted successfully'], 200);
-        } catch (DefaultException $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()], $e->getCode());
+            return $this->responseAccepted();
         } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 422);
+            return $this->responseUnprocessableEntity($e->getMessage());
         }
     }
 }

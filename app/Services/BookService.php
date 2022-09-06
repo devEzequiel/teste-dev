@@ -11,9 +11,6 @@ class BookService
     {
     }
 
-    /**
-     * @throws \Exception
-     */
     public function list(array $filters): array
     {
         try {
@@ -34,10 +31,28 @@ class BookService
 
     }
 
-    public function create(array $data)
+    public function create(array $data): bool
     {
         try {
             return $this->bookRepository->create($data);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function delete(int $id): bool
+    {
+        try {
+            return $this->bookRepository->delete($id);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function update(array $data): bool
+    {
+        try {
+            return $this->bookRepository->update($data);
         } catch (Exception $e) {
             throw $e;
         }

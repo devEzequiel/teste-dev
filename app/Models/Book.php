@@ -21,18 +21,18 @@ class Book extends Model
 
     public function scopeFilter($query, $filters)
     {
-        $query->when($filters['category'], function ($query, $category) {
+        $query->when($filters['category'] ?? null, function ($query, $category) {
             $query->whereHas('category', function ($query) use ($category) {
                 $query->where('slug', $category);
             });
         })
-            ->when($filters['type'], function ($query, $type) {
+            ->when($filters['type'] ?? null, function ($query, $type) {
                 $query->whereHas('type', function ($query) use ($type) {
                     $query->where('id', $type);
                 });
             })
-            ->when($filters['search'], function ($query, $search) {
-                $query->where('id', 'LIKE', '%' . $search . '%');
+            ->when($filters['search'] ?? null, function ($query, $search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
             });
     }
 

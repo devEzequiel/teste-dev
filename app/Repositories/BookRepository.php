@@ -23,13 +23,17 @@ class BookRepository
                     'id' => $book->id,
                     'name' => $book->name,
                     'code' => $book->code,
-                    'size' => $book->sie,
+                    'size' => $book->size . ' páginas',
                     'created_at' => $book->created_at,
                     'category' => $book->category->name ?? null,
-                    'type' => $book->type
+                    'type' => $book->type->description
                 ])->toArray();
 
-            return $books;
+            if (empty($books)) {
+                throw new Exception('Nenhum livro encontrado');
+            }
+
+            return (array) $books;
         } catch (Exception $e) {
             throw $e;
         }
@@ -37,35 +41,79 @@ class BookRepository
 
     /**
      * @param array $data
-     * @return mixed
+     * @return bool
      * @throws Exception
      */
-    public function create(array $data)
+    public function create(array $data): bool
     {
         try {
-            return Book::create($data);
+            return (bool)Book::create($data);
         } catch (Exception $e) {
             throw $e;
         }
     }
 
-    public function getBook(int $id)
+    /**
+     * @param int $id
+     * @return array
+     * @throws Exception
+     */
+    public function getBook(int $id): array
     {
         try {
-            $books = Book::query()
+            $book = Book::query()
                 ->where('id', $id)
                 ->with('category', 'type')
                 ->get()->map(fn($book) => [
                     'id' => $book->id,
                     'name' => $book->name,
                     'code' => $book->code,
-                    'size' => $book->sie,
+                    'size' => $book->size . ' páginas',
                     'created_at' => $book->created_at,
-                    'category' => $book->category ?? null,
-                    'type' => $book->type
+                    'category' => $book->category->name ?? null,
+                    'type' => $book->type->description
                 ])->toArray();
 
-            return $books;
+            if (!$book) {
+                throw new Exception('Livro não encontrado');
+            }
+
+            return $book;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     * @throws Exception
+     */
+    public function delete(int $id): bool
+    {
+        try {
+            $book = Book::find($id);
+
+            if (!$book) {
+                throw new Exception('Livro não encontrado');
+            }
+
+            return (bool)$book->delete();
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function update(array $data)
+    {
+        try {
+            $book = Book::find((int) $data['id']);
+
+            if (!$book) {
+                throw new Exception('Livro não encontrado');
+            }
+
+            return (bool)$book->update($data);
         } catch (Exception $e) {
             throw $e;
         }
