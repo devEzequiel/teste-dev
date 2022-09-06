@@ -1,0 +1,20 @@
+version: '3.5'
+services:
+    db:
+        image: mysql:latest
+        #restart: always
+        environment:
+            MYSQL_DATABASE: 'books'
+            MYSQL_USER: 'root'
+            MYSQL_PASSWORD: ''
+            MYSQL_ROOT_PASSWORD: ''
+        ports:
+            - '3306:3306'
+        expose:
+            - '3306'
+        volumes:
+            - ./my-db:/var/lib/mysql
+#    app:
+
+volumes:
+    my-db:
