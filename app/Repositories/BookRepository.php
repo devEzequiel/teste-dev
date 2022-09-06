@@ -16,24 +16,24 @@ class BookRepository
     public function list(array $filters): array
     {
         try {
-            $books = Book::query()
+            $books = tap(Book::query()
                 ->with('category', 'type')
                 ->filter($filters)
-                ->get()->map(fn($book) => [
-                    'id' => $book->id,
-                    'name' => $book->name,
-                    'code' => $book->code,
-                    'size' => $book->size . ' páginas',
-                    'created_at' => $book->created_at,
-                    'category' => $book->category->name ?? null,
-                    'type' => $book->type->description
-                ])->toArray();
+                ->paginate(10))->transform(fn($book) => [
+                'id' => $book->id,
+                'name' => $book->name,
+                'code' => $book->code,
+                'size' => $book->size . ' páginas',
+                'created_at' => $book->created_at,
+                'category' => $book->category->name ?? null,
+                'type' => $book->type->description
+            ])->toArray();
 
             if (empty($books)) {
                 throw new Exception('Nenhum livro encontrado');
             }
 
-            return (array) $books;
+            return (array)$books;
         } catch (Exception $e) {
             throw $e;
         }
@@ -107,7 +107,7 @@ class BookRepository
     public function update(array $data)
     {
         try {
-            $book = Book::find((int) $data['id']);
+            $book = Book::find((int)$data['id']);
 
             if (!$book) {
                 throw new Exception('Livro não encontrado');
