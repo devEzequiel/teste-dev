@@ -23,7 +23,7 @@ class BookRepository
                 'id' => $book->id,
                 'name' => $book->name,
                 'code' => $book->code,
-                'size' => $book->size . ' páginas',
+                'size' => $book->size . ' pages',
                 'created_at' => $book->created_at,
                 'category' => $book->category->name ?? null,
                 'type' => $book->type->description
@@ -68,7 +68,7 @@ class BookRepository
                     'id' => $book->id,
                     'name' => $book->name,
                     'code' => $book->code,
-                    'size' => $book->size . ' páginas',
+                    'size' => $book->size . ' pages',
                     'created_at' => $book->created_at,
                     'category' => $book->category->name ?? null,
                     'type' => $book->type->description
