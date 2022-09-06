@@ -65,7 +65,7 @@ class BookController extends Controller
         try {
             $book = $this->bookService->getBook($id);
 
-            return $this->responseOk($books);
+            return $this->responseOk($book);
         } catch (Exception $e) {
             return $this->responseUnprocessableEntity($e->getMessage());
         }
