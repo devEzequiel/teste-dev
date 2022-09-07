@@ -1,68 +1,56 @@
-# Teste para candidatos à vaga de Desenvolvedor Full Stack.
+## Books Project
 
-Olá, caro desenvolvedor, nesse teste analisaremos seu conhecimento geral e velocidade de desenvolvimento. Abaixo explicaremos tudo o que será necessário.
+To run the project on your local environment, first follow the API documentation in this page.
 
-# Instruções
-- Você deve desenvolver uma API, utilizando `Laravel`, `Lumen` ou `Node`.
-A escolha das bibliotecas, banco de dados, arquitetura, etc, fica a seu critério.
+Then, run the React project in your local environment,  following [this documentation](https://github.com/devEzequiel/teste-dev/blob/ez-develop/resources/frontend/README.md)
 
-- O código precisa rodar em múltiplas plataformas, utilizando a Docker.
-Altere o arquivo README explicando o que é preciso para rodar sua aplicação.
+## A Laravel API
 
-# O teste
+## Requirements
 
-**Back-End**
+As it is build on the Laravel framework, it has a few system requirements.
 
-A primeira etapa será o desenvolvimento do backend.
+- PHP >= 8.0
+- MySql >= 5.7
+- Composer
 
-**Descrição**:
+You can check all the laravel related dependecies
+[here](https://laravel.com/docs/9.x/deployment#server-requirements)
 
-Você deverá desenvolver uma 'mini api' para que seja possível realizar operações CRUD de uma estante de livros.
-Será necessário gerar um relatório a partir destas informações.
+## Running the API
+Clone the repository and setup
 
-# Condições:
-Você poderá utilizar qualquer tecnologia de banco relacional ou apenas MongoDB como banco não relacional.
-> - O sistema deverá ser separado por módulos, tendo eles, seus respectivos controllers, rotas, models, camada de serviço e repositório.
-> - O sistema deverá retornar os livros de forma paginada.
+`$ git clone git@github.com:devEzequiel/teste-dev.git` <br />
+`$ cd teste-dev` <br />
 
-**Cada livro deverá possuir** :
-- ID
-- Nome
-- Autor
-- Categoria
-- Código (único)
-- Tipo (arquivo digital ou físico)
-- Tamanho (Peso do livro físico ou tamanho do arquivo)
-- Diferenciais : Testes unitários.
+Then, create the database named `books` and add them to the `.env` file.
 
-# Front-End
-**Para a segunda etapa do teste, você deverá desenvolver uma SPA (Single Page Application) com `Vue.js 2` e nela deve ser possível:**
-> - Ver a lista de livros cadastrados
-> - Criar um novo livro
-> - Editar um livro existente
-> - Apagar um livro existente
-> - Filtragem por categoria, tipo de arquivo e nome.
-> - Elaboração de um relatório/dashboard de livros cadastrados, sendo possível filtrar por categoria e por período.
+```
+DB_DATABASE=books
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_password
+```
 
-**Condições**:
-> - A página deve ser responsiva.
-> - A página deve funcionar 100% via AJAX, sem outros carregamentos de páginas.
-> - Os dados das requisições deverão ser gerenciados pelo VUEX.
-> - Ao criar/editar um livro, o campo "categoria" deverá ser um SELECT.
-> - A definição de peso ou tamanho do arquivo deverá ser realizada pela função `watch`, verificando o tipo do arquivo: *arquivo digital ou físico*
+Then install, migrate, seed, all that jazz:
 
-**Dicas**:
-> - Você pode usar frameworks, tanto para o front-end (Vuejs) e tanto para o back-end.
-> - Você pode usar ferramentas de automação (Grunt, Gulp), mas deverá informar o uso completo para funcionamento do teste.
-> - Será considerado ponto positivo no teste a utilização de orientação a objetos, design patterns e rotinas para testes.
+1. `$ composer install`
+2. `$ php artisan migrate:fresh --seed`
+3. `$ php artisan key:generate`
+4. `$ php artisan serve`
 
-**Entrega**
+The API will be running on `localhost:8000`
 
-Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
-Nossa análise
-Organização do código, legibilidade e comentários, uso de padrões.
-Histórico de commits.
 
-**Dúvidas?**
-Quaisquer dúvidas que você venha a ter, abra você mesmo uma nova issue, ou mande um e-mail.
-Boa sorte!
+## API Endpoints and Routes
+
+Access the ./insomnia folder to get the Insomnia collection with all routes setted.
+
+Laravel follows the Model View Controller (MVC) pattern I have created models associated with
+each resource. You can check in the [routes/api.php](https://github.com/devEzequiel/teste-dev/blob/ez-develop/routes/api.php) 
+file for all the routes that map to controllers in order to send out JSON data that make requests to our API.
+
+
+## Authorization
+
+Some routes are protected by sanctum middleware.
+To have access, login and use the **Bearer Token** that will be returned with the json response.
