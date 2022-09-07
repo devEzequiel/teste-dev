@@ -50,6 +50,20 @@ each resource. You can check in the [routes/api.php](https://github.com/devEzequ
 file for all the routes that map to controllers in order to send out JSON data that make requests to our API.
 
 
+```
+  GET|HEAD  api/v1/books .................................................................................... books.list › Api\V1\BookController@all
+  POST      api/v1/books ................................................................................ books.create › Api\V1\BookController@store
+  PUT       api/v1/books ................................................................................. books.edit › Api\V1\BookController@update
+  GET|HEAD  api/v1/books/{id} ............................................................................ books.detail › Api\V1\BookController@show
+  DELETE    api/v1/books/{id} ......................................................................... books.delete › Api\V1\BookController@destroy
+  GET|HEAD  api/v1/categories ..................................................................... categories.list › Api\V1\CategoryController@list
+  POST      api/v1/categories .................................................................. categories.create › Api\V1\CategoryController@store
+  DELETE    api/v1/categories/{id} ........................................................... categories.delete › Api\V1\CategoryController@destroy
+  GET|HEAD  api/v1/utils/health-check ............................................................. utils.check › Api\V1\UtilsController@healthCheck
+  GET|HEAD  sanctum/csrf-cookie .................................................. sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show
+ 
+```
+
 ## Authorization
 
 Some routes are protected by sanctum middleware.
