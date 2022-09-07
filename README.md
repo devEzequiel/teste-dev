@@ -43,7 +43,7 @@ The API will be running on `localhost:8000`
 
 ## API Endpoints and Routes
 
-Access the ./insomnia folder to get the Insomnia collection with all routes setted.
+Access the [ìnsomnia file](https://github.com/devEzequiel/teste-dev/blob/master/.insomnia/books.json) folder to get the Insomnia collection with all routes setted.
 
 Laravel follows the Model View Controller (MVC) pattern I have created models associated with
 each resource. You can check in the [routes/api.php](https://github.com/devEzequiel/teste-dev/blob/ez-develop/routes/api.php) 
